@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import {
   Vuetify,
   VApp,
@@ -12,8 +13,13 @@ import {
   VAvatar,
   VMenu,
   VSwitch,
+  VCard,
+  VTextField,
+  VProgressLinear,
   transitions
 } from 'vuetify'
+
+import { routes } from './routes'
 import App from './App.vue'
 
 Vue.use(Vuetify, {
@@ -29,11 +35,22 @@ Vue.use(Vuetify, {
     VAvatar,
     VMenu,
     VSwitch,
+    VCard,
+    VTextField,
+    VProgressLinear,
     transitions
   }
 })
 
+Vue.use(VueRouter)
+
+const router = new VueRouter({
+  routes,
+  mode: 'history'
+})
+
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  router
 })
