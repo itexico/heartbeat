@@ -25,7 +25,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn fab top right absolute class="accent">
+      <v-btn fab top right absolute class="accent" @click="add">
         <v-icon>add</v-icon>
       </v-btn>
     </v-footer>
@@ -40,6 +40,11 @@ export default {
   },
   data() {
     return {}
+  },
+  methods: {
+    add() {
+      this.$router.push('/remote')
+    }
   }
 }
 </script>

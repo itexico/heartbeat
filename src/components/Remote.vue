@@ -21,7 +21,7 @@
             <v-list-tile>
               <v-list-tile-title>Edit</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile>
+            <v-list-tile @click="removeRemote( remote._id )">
               <v-list-tile-title>Remove</v-list-tile-title>
             </v-list-tile>
           </v-list>
@@ -47,6 +47,11 @@ export default {
           monitoring: true
         }
       }
+    }
+  },
+  methods: {
+    removeRemote(id) {
+      this.$store.commit('deleteRemote', id)
     }
   }
 }
