@@ -7,7 +7,7 @@
 
         <v-card-text>
           <v-text-field prepend-icon="visibility" label="Alias" suffix=" " autofocus v-model="remote.alias"></v-text-field>
-          <v-text-field prepend-icon="cloud" prefix="http://" suffix=" " v-model="remote.uri"></v-text-field>
+          <v-text-field prepend-icon="cloud" prefix="http://" suffix=" " :value="remote.uri | hideProtocol" @input="val => remote.uri = val"></v-text-field>
           <v-text-field prepend-icon="timer" label="Interval" suffix="s" v-model="remote.interval"></v-text-field>
         </v-card-text>
 
@@ -37,7 +37,7 @@ export default {
     this.loading = false
     let id = this.$route.params.id
     if (id) {
-      this.remote = this.$store.getters.remote(id)
+      this.remote = { ...this.$store.getters.remote(id) }
     }
   },
   methods: {
@@ -47,6 +47,11 @@ export default {
     save() {
       this.$store.commit('saveRemote', this.remote)
       this.$router.push('/')
+    }
+  },
+  filters: {
+    hideProtocol(value = '') {
+      return value.replace('http://', '')
     }
   }
 }
