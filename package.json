@@ -5,10 +5,14 @@
   "author": " <>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --host=0.0.0.0",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "dev":
+      "cross-env NODE_ENV=development webpack-dev-server --inline --hot --host=0.0.0.0",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "nwdev":
+      "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run ./launch\""
   },
   "dependencies": {
+    "concurrently": "^3.5.1",
     "vue": "^2.4.2",
     "vue-router": "^3.0.1",
     "vuetify": "^0.16.9",
@@ -17,12 +21,13 @@
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
+    "babel-plugin-transform-imports": "^1.4.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-stage-2": "^6.24.1",
-    "babel-plugin-transform-imports": "^1.4.1",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
+    "nwjs-builder-phoenix": "^1.14.6",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
@@ -31,5 +36,9 @@
     "vuetify-loader": "^0.1.0",
     "webpack": "^2.6.1",
     "webpack-dev-server": "^2.4.5"
-  }
+  },
+  "build": {
+    "nwVersion": "0.24.0"
+  },
+  "main": "index.html"
 }
