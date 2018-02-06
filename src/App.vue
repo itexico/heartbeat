@@ -1,11 +1,11 @@
 <template>
   <v-app dark>
-    <v-toolbar dark fixed dense>
+    <v-toolbar style="-webkit-app-region: drag;" dark fixed dense>
       <v-toolbar-title>Heartbeat</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+      <v-btn icon @click="closeWindow()">
         <v-icon>close</v-icon>
       </v-btn>
 
@@ -34,6 +34,9 @@
 
 <script>
 import HbRemotesList from './components/RemotesList.vue'
+
+let win = nw.Window.get()
+
 export default {
   components: {
     HbRemotesList
@@ -44,6 +47,9 @@ export default {
   methods: {
     add() {
       this.$router.push('/remote')
+    },
+    closeWindow() {
+      win.close()
     }
   }
 }

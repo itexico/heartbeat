@@ -4,5 +4,14 @@
     "nwVersion": "0.24.0"
   },
   "chromium-args": "--load-extension='./vue-devtools'",
-  "main": "http://localhost:8080/"
+  "main": "http://localhost:8080/",
+  "node-remote": "http://*/*",
+  "window": {
+    "id": "mainWindow",
+    "title": "Heartbeat",
+    "width": 455,
+    "height": 460,
+    "frame": false,
+    "resizable": true
+  }
 }
