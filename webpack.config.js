@@ -1,7 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 
-var resolve = (p) => path.resolve(__dirname, p)
+var resolve = p => path.resolve(__dirname, p)
 
 module.exports = {
   entry: './src/main.js',
@@ -13,8 +13,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      'public': resolve('./public')
+      vue$: 'vue/dist/vue.esm.js',
+      public: resolve('./public')
     }
   },
   module: {
@@ -23,8 +23,7 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
-          loaders: {
-          }
+          loaders: {}
         }
       },
       {
@@ -41,12 +40,17 @@ module.exports = {
       },
       {
         test: /\.styl$/,
-        loader: ['style-loader', 'css-loader', 'stylus-loader', {
-          loader: 'vuetify-loader',
-          options: {
-            theme: resolve('./src/stylus/theme.styl')
+        loader: [
+          'style-loader',
+          'css-loader',
+          'stylus-loader',
+          {
+            loader: 'vuetify-loader',
+            options: {
+              theme: resolve('./src/stylus/theme.styl')
+            }
           }
-        }]
+        ]
       }
     ]
   },
@@ -57,7 +61,11 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  externals: {
+    fs: 'commonjs fs',
+    path: 'commonjs path'
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {

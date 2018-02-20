@@ -57,4 +57,9 @@ export default {
 
 <style lang="stylus">
 @import './stylus/main';
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
 </style>
