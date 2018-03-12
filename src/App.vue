@@ -13,7 +13,9 @@
 
     <main>
       <v-container fluid class="pa-0">
-        <router-view></router-view>
+        <keep-alive include="theList">
+          <router-view></router-view>
+        </keep-alive>
       </v-container>
     </main>
 

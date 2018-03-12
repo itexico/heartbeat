@@ -14,7 +14,7 @@
 
     <v-list-tile-action>
       <v-layout>
-        <v-switch></v-switch>
+        <v-switch v-model="remote.monitoring" color="primary" @change="toggleMonitor"></v-switch>
         <v-menu>
           <v-btn icon slot="activator" class="ml-2">
             <v-icon>more_vert</v-icon>
@@ -56,6 +56,14 @@ export default {
   methods: {
     removeRemote(id) {
       this.$store.commit('deleteRemote', id)
+    },
+    toggleMonitor() {
+      if (this.remote.monitoring) {
+        this.createMonitor()
+      } else {
+        this.currentStatus = '-'
+        this.destroyMonitor()
+      }
     }
   },
   data() {

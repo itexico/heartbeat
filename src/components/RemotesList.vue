@@ -14,6 +14,7 @@ import HbRemote from './Remote.vue'
 import { mapGetters } from 'vuex'
 
 export default {
+  name: 'theList',
   components: {
     HbRemote
   },

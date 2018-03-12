@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'theForm',
   data() {
     return {
       loading: true,
