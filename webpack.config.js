@@ -64,7 +64,8 @@ module.exports = {
   devtool: '#eval-source-map',
   externals: {
     fs: 'commonjs fs',
-    path: 'commonjs path'
+    path: 'commonjs path',
+    nedb: 'commonjs nedb'
   }
 }
 

@@ -46,8 +46,24 @@ export default {
       this.$router.push({ path: '/' })
     },
     save() {
-      this.$store.commit('saveRemote', this.remote)
-      this.$router.push('/')
+      const remote = {
+        _id: this.remote._id,
+        alias: this.remote.alias,
+        uri: this.remote.uri,
+        interval: this.remote.interval,
+        monitoring: this.remote.monitoring
+      }
+
+      this.loading = true
+      this.$store.dispatch('storeRemote', remote).then(
+        () => {
+          this.loading = false
+          this.$router.push('/')
+        },
+        err => {
+          console.error(err)
+        }
+      )
     }
   },
   filters: {

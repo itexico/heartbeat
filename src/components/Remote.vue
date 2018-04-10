@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     removeRemote(id) {
-      this.$store.commit('deleteRemote', id)
+      this.$store.dispatch('removeRemote', id)
     },
     toggleMonitor() {
       if (this.remote.monitoring) {
