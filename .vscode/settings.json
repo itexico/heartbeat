@@ -1,5 +1,5 @@
 {
-  "workbench.colorTheme": "Material Theme",
+  "workbench.colorTheme": "Material Theme Darker",
   "editor.formatOnSave": true,
   "prettier.semi": false,
   "prettier.singleQuote": true,
@@ -7,8 +7,8 @@
     "colourTheme": "Default"
   },
   "vetur.format.defaultFormatter.html": "js-beautify-html",
-  "editor.fontSize": 16,
-  "window.zoomLevel": 2,
+  "editor.fontSize": 18,
+  "window.zoomLevel": 0,
   "emmet.includeLanguages": {
     "vue-html": "html",
     "vue": "html"

@@ -45,6 +45,10 @@ export const storeDef = {
           resolve()
         }
 
+        remote.uri = !remote.uri.startsWith('http://')
+          ? `http://${remote.uri}`
+          : remote.uri
+
         if (remote._id) {
           db.remotes.update(
             { _id: remote._id },
@@ -73,10 +77,6 @@ export const storeDef = {
   mutations: {
     saveRemote: (state, remote) => {
       let index = state.remotesList.findIndex(({ _id }) => _id === remote._id)
-
-      remote.uri = !remote.uri.startsWith('http://')
-        ? `http://${remote.uri}`
-        : remote.uri
 
       if (index >= 0) {
         state.remotesList.splice(index, 1, remote)
