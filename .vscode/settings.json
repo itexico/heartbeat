@@ -12,5 +12,6 @@
   "emmet.includeLanguages": {
     "vue-html": "html",
     "vue": "html"
-  }
+  },
+  "terminal.integrated.fontSize": 18
 }
