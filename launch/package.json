@@ -1,7 +1,7 @@
 {
   "name": "devenv",
   "build": {
-    "nwVersion": "0.24.0"
+    "nwVersion": "0.33.3"
   },
   "chromium-args": "--load-extension='./vue-devtools'",
   "main": "http://localhost:8080/",

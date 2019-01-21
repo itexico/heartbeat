@@ -11,9 +11,11 @@ export default {
   },
   methods: {
     createMonitor() {
+
       this.monitor = new Monitor({
         website: this.remote.uri,
-        interval: this.remote.interval / 60
+        interval: this.remote.interval / 60,
+        method: 'GET'
       })
 
       const audio = {
@@ -30,22 +32,25 @@ export default {
         console.log(`${this.remote.alias} is up!`)
         this.currentStatus = 'online'
 
-        if (!notifications.up) {
+        if (!notifications.up && this.$store.state.settings.notifications) {
           notifications.up = new Notification(`${this.remote.alias} is up!`, {
             body: '\n \n Health endpoint is responding.'
           })
 
           notifications.up.onshow = () => {
-            audio.up.play()
+            if (this.$store.state.settings.sounds) {
+              audio.up.play()
+            }
+            notifications.down = null
           }
         }
       })
 
-      let downCallback = res => {
+      this.monitor.on('down', res => {
         console.warn(`${this.remote.alias} is down :(`, res)
-        this.currentStatus = 'offline'
+        this.currentStatus = this.monitor ? 'offline' : '-'
 
-        if (!notifications.down) {
+        if (!notifications.down && this.$store.state.settings.notifications) {
           notifications.down = new Notification(
             `${this.remote.alias} is offline.`,
             {
@@ -54,18 +59,18 @@ export default {
           )
 
           notifications.down.onshow = () => {
-            audio.error.play()
+            if (this.$store.state.settings.sounds) {
+              audio.error.play()
+            }
+            notifications.up = null
           }
         }
-      }
-
-      this.monitor.on('down', downCallback)
-      this.monitor.on('error', downCallback)
+      })
     },
     destroyMonitor() {
       if (this.monitor) {
         this.monitor.stop()
-        this.monitor = null
+        delete this.monitor
         this.currentStatus = '-'
       }
     }

@@ -17,7 +17,9 @@ import {
   VCard,
   VTextField,
   VProgressLinear,
-  transitions
+  transitions,
+  VDialog,
+  VCheckbox
 } from 'vuetify'
 
 import { routes } from './routes'
@@ -40,7 +42,9 @@ Vue.use(Vuetify, {
     VCard,
     VTextField,
     VProgressLinear,
-    transitions
+    transitions,
+    VDialog,
+    VCheckbox
   }
 })
 

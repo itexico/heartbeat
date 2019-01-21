@@ -2,9 +2,11 @@ const Datastore = require('nedb')
 const db = {}
 
 const path = require('path')
+const fsPromises = require('fs').promises
 
 const filePaths = {
-  dbPath: path.join(nw.App.dataPath, 'remotes.db')
+  dbPath: path.join(nw.App.dataPath, 'remotes.db'),
+  settingsFile: path.join(nw.App.dataPath, 'settings.json')
 }
 
 db.remotes = new Datastore({
@@ -24,6 +26,11 @@ db.remotes = new Datastore({
 
 export const storeDef = {
   state: {
+    settings: {
+      interval: '12',
+      notifications: true,
+      sounds: true
+    },
     remotesList: []
   },
   getters: {
@@ -72,9 +79,41 @@ export const storeDef = {
           resolve()
         })
       })
+    },
+    storeSettings({ commit }, settings) {
+      return fsPromises
+        .writeFile(filePaths.settingsFile, JSON.stringify(settings, null, 2))
+        .then(
+          () => {
+            commit('updateSettings', settings)
+          },
+          err => console.error('There was an error while writing the file :(')
+        )
+    },
+    loadSettings({ commit }) {
+      return fsPromises.readFile(filePaths.settingsFile).then(
+        data => {
+          let settings =
+            typeof data !== 'undefined'
+              ? JSON.parse(data.toString())
+              : state.settings
+
+          commit('updateSettings', settings)
+          return settings
+        },
+        err => {
+          if (err.code === 'ENOENT') {
+            console.warn('No settings file found, creating one...')
+            this.storeSettings(state.settings)
+          }
+        }
+      )
     }
   },
   mutations: {
+    loadRemotes: (state, remotesList) => {
+      state.remotesList = remotesList
+    },
     saveRemote: (state, remote) => {
       let index = state.remotesList.findIndex(({ _id }) => _id === remote._id)
 
@@ -87,6 +126,9 @@ export const storeDef = {
     deleteRemote: (state, id) => {
       let index = state.remotesList.findIndex(({ _id }) => _id === id)
       state.remotesList.splice(index, 1)
+    },
+    updateSettings: (state, settings) => {
+      state.settings = settings
     }
   }
 }

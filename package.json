@@ -12,7 +12,7 @@
   "dependencies": {
     "concurrently": "^3.6.1",
     "nedb": "^1.8.0",
-    "ping-monitor": "^0.1.6",
+    "ping-monitor": "^0.2.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuetify": "^0.16.9",

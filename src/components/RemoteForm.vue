@@ -24,13 +24,14 @@
 <script>
 export default {
   name: 'theForm',
+
   data() {
     return {
       loading: true,
       remote: {
         alias: '',
         uri: '',
-        interval: 10
+        interval: null
       }
     }
   },
@@ -39,7 +40,15 @@ export default {
     let id = this.$route.params.id
     if (id) {
       this.remote = { ...this.$store.getters.remote(id) }
+    } else {
+      this.remote.interval = this.$store.state.settings.interval
     }
+
+    this.$store.subscribe(mutation => {
+      if (mutation.type === 'updateSettings') {
+        this.remote.interval = mutation.payload.interval
+      }
+    })
   },
   methods: {
     cancel() {

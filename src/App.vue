@@ -17,11 +17,13 @@
           <router-view></router-view>
         </keep-alive>
       </v-container>
+
+      <hb-settings-dialog v-if="defaultValues" :defaults="defaultValues" :dialog.sync="settingsDialog"></hb-settings-dialog>
     </main>
 
     <v-footer :fixed="true">
 
-      <v-btn icon>
+      <v-btn icon @click="settingsDialog = true" :disabled="!defaultValues">
         <v-icon class="grey--text text-darken-3">settings</v-icon>
       </v-btn>
 
@@ -36,15 +38,25 @@
 
 <script>
 import HbRemotesList from './components/RemotesList.vue'
+import HbSettingsDialog from './components/SettingsDialog.vue'
 
 let win = nw.Window.get()
 
 export default {
   components: {
-    HbRemotesList
+    HbRemotesList,
+    HbSettingsDialog
+  },
+  created() {
+    this.$store
+      .dispatch('loadSettings')
+      .then(settings => (this.defaultValues = settings))
   },
   data() {
-    return {}
+    return {
+      settingsDialog: false,
+      defaultValues: null
+    }
   },
   methods: {
     add() {
