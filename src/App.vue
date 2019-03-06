@@ -1,35 +1,49 @@
 <template>
   <v-app dark>
-    <v-toolbar style="-webkit-app-region: drag;" dark fixed dense>
+    <v-toolbar style="-webkit-app-region: drag;"
+               dark
+               fixed
+               dense>
       <v-toolbar-title>Heartbeat</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="closeWindow()">
+      <v-btn icon
+             @click="closeWindow()">
         <v-icon>close</v-icon>
       </v-btn>
 
     </v-toolbar>
 
     <main>
-      <v-container fluid class="pa-0">
+      <v-container fluid
+                   class="pa-0">
         <keep-alive include="theList">
           <router-view></router-view>
         </keep-alive>
       </v-container>
 
-      <hb-settings-dialog v-if="defaultValues" :defaults="defaultValues" :dialog.sync="settingsDialog"></hb-settings-dialog>
+      <hb-settings-dialog v-if="defaultValues"
+                          :defaults="defaultValues"
+                          :dialog.sync="settingsDialog"></hb-settings-dialog>
     </main>
 
     <v-footer :fixed="true">
 
-      <v-btn icon @click="settingsDialog = true" :disabled="!defaultValues">
+      <v-btn icon
+             @click="settingsDialog = true"
+             :disabled="!defaultValues">
         <v-icon class="grey--text text-darken-3">settings</v-icon>
       </v-btn>
 
       <v-spacer></v-spacer>
 
-      <v-btn fab top right absolute class="accent" @click="add">
+      <v-btn fab
+             top
+             right
+             absolute
+             class="accent"
+             @click="add">
         <v-icon>add</v-icon>
       </v-btn>
     </v-footer>

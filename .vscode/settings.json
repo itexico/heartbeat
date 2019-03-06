@@ -1,10 +1,14 @@
 {
   "workbench.colorTheme": "Material Theme Darker",
   "editor.formatOnSave": true,
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "materialTheme.cache.workbench.settings": {
-    "colourTheme": "Default"
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      "wrap_attributes": "force-aligned"
+    },
+    "prettier": {
+      "semi": false,
+      "singleQuote": true
+    }
   },
   "vetur.format.defaultFormatter.html": "js-beautify-html",
   "editor.fontSize": 18,
