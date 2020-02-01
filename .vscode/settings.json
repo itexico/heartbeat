@@ -11,11 +11,16 @@
     }
   },
   "vetur.format.defaultFormatter.html": "js-beautify-html",
-  "editor.fontSize": 18,
-  "window.zoomLevel": 0,
+  "editor.fontSize": 20,
+  "window.zoomLevel": 1,
   "emmet.includeLanguages": {
     "vue-html": "html",
     "vue": "html"
   },
-  "terminal.integrated.fontSize": 18
+  "terminal.integrated.fontSize": 18,
+"workbench.sideBar.location": "left",
+"prettier.semi": false,
+"prettier.singleQuote": true,
+"editor.fontFamily": "'Anonymous Pro', Menlo, Monaco, 'Courier New', monospace",
+"editor.fontWeight": "100"
 }

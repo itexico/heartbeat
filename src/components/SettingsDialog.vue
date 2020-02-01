@@ -1,15 +1,26 @@
 <template>
-  <v-dialog v-model="internalDialog" fullscreen :overlay="false" transition="dialog-bottom-transition" @keydown.esc="close()">
+  <v-dialog
+    v-model="internalDialog"
+    fullscreen
+    :overlay="false"
+    transition="dialog-bottom-transition"
+    @keydown.esc="close()"
+  >
     <v-card>
-
-      <v-toolbar dark class="secondary">
-        <v-btn icon @click="close()">
+      <v-toolbar style="-webkit-app-region: drag;" dark class="secondary">
+        <v-btn style="webkit-app-region: no-drag" icon @click="close()">
           <v-icon>close</v-icon>
         </v-btn>
         <v-toolbar-title>Settings</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn dark flat @click="saveSettings()">Save</v-btn>
+          <v-btn
+            style="webkit-app-region: no-drag"
+            dark
+            flat
+            @click="saveSettings()"
+            >Save</v-btn
+          >
         </v-toolbar-items>
       </v-toolbar>
 
@@ -20,29 +31,52 @@
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>Ping interval</v-list-tile-title>
-              <v-list-tile-sub-title>Set the interval between pings in seconds</v-list-tile-sub-title>
+              <v-list-tile-sub-title
+                >Set the interval between pings in
+                seconds</v-list-tile-sub-title
+              >
             </v-list-tile-content>
-            <v-text-field name="pingInterval" id="pingInt" suffix="s" v-model="settings.interval"></v-text-field>
+            <v-text-field
+              name="pingInterval"
+              id="pingInt"
+              suffix="s"
+              v-model="settings.interval"
+            ></v-text-field>
           </v-list-tile>
 
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>Notifications</v-list-tile-title>
-              <v-list-tile-sub-title>Display notifications when detecting a change in status</v-list-tile-sub-title>
+              <v-list-tile-sub-title
+                >Display notifications when detecting a change in
+                status</v-list-tile-sub-title
+              >
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-checkbox v-model="settings.notifications" color="primary"></v-checkbox>
+              <v-checkbox
+                v-model="settings.notifications"
+                color="primary"
+              ></v-checkbox>
             </v-list-tile-action>
           </v-list-tile>
 
           <v-list-tile>
             <v-list-tile-content>
               <v-list-tile-title>Sound</v-list-tile-title>
-              <v-list-tile-sub-title>Play a sound alongside the notification</v-list-tile-sub-title>
-              <small>(Note that notifications should be enabled if you want to change this)</small>
+              <v-list-tile-sub-title
+                >Play a sound alongside the notification</v-list-tile-sub-title
+              >
+              <small
+                >(Note that notifications should be enabled if you want to
+                change this)</small
+              >
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-checkbox v-model="settings.sounds" :disabled="!settings.notifications" color="primary"></v-checkbox>
+              <v-checkbox
+                v-model="settings.sounds"
+                :disabled="!settings.notifications"
+                color="primary"
+              ></v-checkbox>
             </v-list-tile-action>
           </v-list-tile>
         </v-list>

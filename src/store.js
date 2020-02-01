@@ -16,10 +16,6 @@ db.remotes = new Datastore({
     if (err) {
       console.error('Error while loading the db!', err)
     }
-
-    db.remotes.find({}, (err, result) => {
-      storeDef.state.remotesList = result
-    })
   },
   timestampData: true
 })
@@ -35,8 +31,7 @@ export const storeDef = {
   },
   getters: {
     allRemotes: state => state.remotesList,
-    remote: (state, getters) => id =>
-      state.remotesList.find(({ _id }) => _id === id)
+    remote: state => id => state.remotesList.find(({ _id }) => _id === id)
   },
   actions: {
     storeRemote({ commit }, remote) {
@@ -90,7 +85,7 @@ export const storeDef = {
           err => console.error('There was an error while writing the file :(')
         )
     },
-    loadSettings({ commit }) {
+    loadSettings({ commit, state, dispatch }) {
       return fsPromises.readFile(filePaths.settingsFile).then(
         data => {
           let settings =
@@ -104,10 +99,21 @@ export const storeDef = {
         err => {
           if (err.code === 'ENOENT') {
             console.warn('No settings file found, creating one...')
-            this.storeSettings(state.settings)
+            dispatch('storeSettings', state.settings)
           }
         }
       )
+    },
+    loadRemotes({ commit }) {
+      return new Promise((resolve, reject) => {
+        db.remotes.find({}, (err, result) => {
+          if (err) {
+            reject(err)
+          }
+          commit('loadRemotes', result)
+          resolve()
+        })
+      })
     }
   },
   mutations: {

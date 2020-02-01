@@ -8,40 +8,37 @@
         "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --host=0.0.0.0",
         "vue:build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
         "icon": "node ./node_modules/png2icns/cli.js icon.png -o dist/icon.icns",
-        "nw:dev": "concurrently --kill-others --raw \"npm run dev\" \"./node_modules/.bin/run ./launch\"",
-        "nw:build": "./node_modules/.bin/build --mac --x64 ./dist && open ./dist/nw-builds/",
-        "nw:pack": "npm run vue:build && npm run nw:build"
+        "nw:dev": "cp -r public/ launch/public && concurrently --kill-others --raw \"npm run dev\" \"npx run ./launch\"",
+        "nw:build": "npx build --mac --x64 ./dist && open ./dist/nw-builds/",
+        "nw:pack": "cp -r public/ dist/public && npm run vue:build && npm run nw:build"
     },
     "dependencies": {
         "nedb": "^1.8.0",
         "ping-monitor": "0.2.2",
-        "vue": "^2.5.17",
-        "vue-router": "^3.0.1",
+        "vue": "^2.6.11",
+        "vue-router": "^3.1.5",
         "vuetify": "^0.16.9",
-        "vuex": "^3.0.1"
+        "vuex": "^3.1.2"
     },
     "devDependencies": {
-        "concurrently": "^3.6.1",
         "babel-core": "^6.26.3",
         "babel-loader": "^6.0.0",
         "babel-plugin-transform-imports": "^1.5.0",
         "babel-preset-env": "^1.7.0",
         "babel-preset-stage-2": "^6.24.1",
+        "concurrently": "^3.6.1",
         "cross-env": "^3.0.0",
         "css-loader": "^0.25.0",
         "file-loader": "^0.9.0",
         "nwjs-builder-phoenix": "^1.14.8",
         "style-loader": "^0.13.1",
-        "stylus": "^0.54.5",
+        "stylus": "^0.54.7",
         "stylus-loader": "^3.0.2",
         "vue-loader": "^12.1.0",
-        "vue-template-compiler": "^2.5.17",
+        "vue-template-compiler": "^2.6.11",
         "vuetify-loader": "^0.1.0",
         "webpack": "^2.6.1",
-        "webpack-dev-server": "^2.11.3"
-    },
-    "build": {
-        "nwVersion": "0.24.0"
+        "webpack-dev-server": "^2.11.5"
     },
     "main": "index.html"
 }

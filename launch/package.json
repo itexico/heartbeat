@@ -1,17 +1,18 @@
 {
-  "name": "devenv",
-  "build": {
-    "nwVersion": "0.33.3"
-  },
-  "chromium-args": "--load-extension='./vue-devtools'",
-  "main": "http://localhost:8080/",
-  "node-remote": "http://localhost/*",
-  "window": {
-    "id": "mainWindow",
-    "title": "Heartbeat",
-    "width": 455,
-    "height": 460,
-    "frame": false,
-    "resizable": true
-  }
+    "name": "devenv",
+    "build": {
+        "nwVersion": "0.43.6"
+    },
+    "chromium-args": "--load-extension='./vue-devtools'",
+    "main": "http://localhost:8080/",
+    "node-remote": "http://localhost/*",
+    "window": {
+        "id": "mainWindow",
+        "title": "Heartbeat",
+        "width": 455,
+        "height": 460,
+        "frame": false,
+        "resizable": true
+    },
+    "bg-script": "./public/bgScript.js"
 }
