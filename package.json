@@ -38,7 +38,7 @@
         "vue-template-compiler": "^2.6.11",
         "vuetify-loader": "^0.1.0",
         "webpack": "^2.6.1",
-        "webpack-dev-server": "^2.11.5"
+        "webpack-dev-server": "^3.1.11"
     },
     "main": "index.html"
 }
